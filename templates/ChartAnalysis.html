@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback Chart</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans|Oswald'>
+
+      <link rel="stylesheet" href="/static/feedback/css/style.css">
+
+
+</head>
+
+<body>
+  <header>
+  <div class='wrapper'>
+    <div class='logo'>
+      <h1>
+        Feedback
+        <strong>Analysis</strong>
+      </h1>
+    </div>
+    <nav>
+      <ul>
+        <li>
+          <a class='active' href='#timeline'>
+            Chart
+          </a>
+        </li>
+        <li>
+          <a href='#about'>
+            Summary
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class='wrapper'>
+
+  <aside class='feature' id='chartfeature'>
+     <h4 id='timeline'></h4>
+    <h3 id='charttitle'></h3>
+    <div class='table-responsive' style="background-color: white;">
+        <canvas id="myChart"></canvas>
+      <!-- <div class='chart'></div> -->
+    </div>
+  </aside>
+</div>
+<main>
+  <div class='wrapper'>
+    <section id='about'>
+      <h2>Summary</h2>
+      <h3>Strengths</h3>
+      <p class='lead'>{{strength}}</p>
+      <h3>Improvements</h3>
+      <p class='lead'>{{improvements}}</p>
+
+    </section>
+  </div>
+</main>
+<footer>
+  <p>
+
+  </p>
+</footer>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js'></script>
+
+
+
+     <!-- <script  src="/static/feedback/js/index.js"></script> -->
+     <script>
+     var ctx = document.getElementById("myChart").getContext("2d");
+     Chart.defaults.global.defaultFontFamily = "Lato";
+     Chart.defaults.global.defaultFontSize = 18;
+     var data = {
+    labels: ["CO", "Teaching style", "Intearctivity", "Understanding", "Discipline", "Exam"],
+    datasets: [
+        {
+            label: "Positive",
+            backgroundColor: 'rgba(0, 99, 132, 0.6)',
+            data: {{positive}}
+        },
+        {
+            label: "Negative",
+            backgroundColor: 'rgba(99, 132, 0, 0.6)',
+            data: {{negative}}
+        }
+    ]
+};
+
+var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+        barValueSpacing: 20,
+        scales: {
+          xAxes: [{
+            barPercentage: 1,
+            categoryPercentage: 0.6
+          }],
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                }
+            }]
+        }
+    }
+});
+     </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Feedback Chart</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <div style="height: 600px; width: 600px">
+    <canvas id="densityChart" width="600" height="400"></canvas>
+  </div>
+  </body>
+
+
+        <script>
+        var densityCanvas = document.getElementById("densityChart");
+
+          Chart.defaults.global.defaultFontFamily = "Lato";
+          Chart.defaults.global.defaultFontSize = 18;
+
+          var densityData = {
+            label: 'Positive Responses',
+            data: {{positive}},
+            backgroundColor: 'rgba(0, 99, 132, 0.6)',
+            borderWidth: 0,
+            yAxisID: "y-axis-density"
+          };
+
+          var gravityData = {
+            label: 'Negative Responses',
+            data: {{negative}},
+            backgroundColor: 'rgba(99, 132, 0, 0.6)',
+            borderWidth: 0,
+            yAxisID: "y-axis-gravity"
+          };
+
+          var planetData = {
+            labels: ["CO", "Teaching style", "Intearctivity", "Understanding", "Discipline", "Exam"],
+            datasets: [densityData, gravityData]
+          };
+
+          var chartOptions = {
+            scales: {
+              xAxes: [{
+                barPercentage: 1,
+                categoryPercentage: 0.6
+              }],
+              yAxes: [{
+                id: "y-axis-density"
+              }, {
+                id: "y-axis-gravity"
+              }]
+            }
+          };
+
+          var barChart = new Chart(densityCanvas, {
+            type: 'bar',
+            data: planetData,
+            options: chartOptions
+          });
+
+        </script>
+</html>
